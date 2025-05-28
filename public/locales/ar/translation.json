@@ -20,13 +20,15 @@
     },
     "filters": {
 
-       "all_categories": "جميع التصنيفات",
+        "all_categories": "جميع التصنيفات",
     "categories": {
-      "Wellness": "الصحة ",
-      "Fashion": "الأزياء والموضة",
-      "Activities": "الأنشطة والترفيه",
-      "Technology": "الإلكترونيات والتقنية",
-      "Outdoor": "الرحلات والهواء الطلق"
+      "Restaurants": "مطاعم",
+      "Healthcare": "رعاية صحية",
+      "Education": "تعليم",
+      "Shopping": "تسوق",
+      "Entertainment": "ترفيه",
+      "Travel": "سفر",
+      "Beauty": "جمال"
     },
 
       "all_locations": "جميع المواقع",

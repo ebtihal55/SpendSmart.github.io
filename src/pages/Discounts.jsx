@@ -26,6 +26,21 @@ function Discounts() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  //  const categoriesList = [
+  //   "All Categories",
+  //   "Restaurants",
+  //   "Healthcare",
+  //   "Education",
+  //   "Shopping",
+  //   "Entertainment",
+  //   "Travel",
+  //   "Beauty"
+  // ];
+// استبدال القائمة الثابتة بالديناميكية
+const categoriesList = [
+  "All Categories",
+  ...new Set(deals.map(deal => deal.category?.name).filter(Boolean))
+];
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -222,21 +237,22 @@ function Discounts() {
     };
 
     // FIXED: Properly handle discount values
-    const matchesDiscount = () => {
-      if (!selectedDiscount) return true;
-      
-      // Convert discount to number safely
-      const discountValue = parseFloat(deal.discount);
-      if (isNaN(discountValue)) return false;
-      
-      switch(selectedDiscount) {
-        case 'under25': return discountValue < 25;
-        case '25to50': return discountValue >= 25 && discountValue <= 50;
-        case 'over50': return discountValue > 50;
-        default: return true;
-      }
-    };
-
+const matchesDiscount = () => {
+  if (!selectedDiscount) return true;
+  
+  // إزالة الرموز غير رقمية (مثل %)
+  const cleanDiscount = deal.discount.replace(/[^0-9.]/g, '');
+  const discountValue = parseFloat(cleanDiscount);
+  
+  if (isNaN(discountValue)) return false;
+  
+  switch(selectedDiscount) {
+    case 'under25': return discountValue < 25;
+    case '25to50': return discountValue >= 25 && discountValue <= 50;
+    case 'over50': return discountValue > 50;
+    default: return true;
+  }
+};
     return matchesSearch && matchesLocation && matchesCategory && matchesPriceRange() && matchesDiscount();
   });
 
@@ -316,10 +332,11 @@ function Discounts() {
                   value={selectedCategory} 
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
-                  <option value="">{t('discounts.filters.all_categories')}</option>
-                  {categories.map(category => (
-                    <option key={category} value={category}>
-                      {t(`discounts.filters.categories.${category}`)}
+                  {categoriesList.map(category => (
+                    <option key={category} value={category === "All Categories" ? "" : category}>
+                      {category === "All Categories" 
+                        ? t('discounts.filters.all_categories') 
+                        : t(`discounts.filters.categories.${category}`)}
                     </option>
                   ))}
                 </select>

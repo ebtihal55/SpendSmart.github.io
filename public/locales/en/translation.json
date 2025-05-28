@@ -20,13 +20,15 @@
     },
     "filters": {
 
-      "all_categories": "All Categories",
+        "all_categories": "All Categories",
     "categories": {
-      "Wellness": "Wellness",
-      "Fashion": "Fashion",
-      "Activities": "Activities",
-      "Technology": "Technology",
-      "Outdoor": "Outdoor"
+      "Restaurants": "Restaurants",
+      "Healthcare": "Healthcare",
+      "Education": "Education",
+      "Shopping": "Shopping",
+      "Entertainment": "Entertainment",
+      "Travel": "Travel",
+      "Beauty": "Beauty"
     },
 
 
